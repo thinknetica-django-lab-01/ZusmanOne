@@ -20,7 +20,7 @@ import main.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main.views.Home, name = 'Home'),
+    path('', main.views.home, name = 'Home'),
     path('pages/', include('django.contrib.flatpages.urls')),
     #path(r'^about/', include('django.contrib.flatpages.urls')),
     #path(r'^about/', include('django.contrib.flatpages.views.flatpage')),
