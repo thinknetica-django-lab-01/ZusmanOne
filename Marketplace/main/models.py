@@ -6,7 +6,8 @@ class Product(models.Model):
     description_product = models.TextField(blank=True, help_text='введите описание товара')
     price_product = models.DecimalField(max_digit=10, decimal_places=10, help_text='укажите цену')
     created_product = models.DateTimeField(auto_now_add=True)
-    saleman_product = models.ForeignKey('SaleMan', null=True, on_delte=models.SET_NULL)
+    saleman_product = models.ForeignKey('SaleMan', null=True, on_delte=models.SET_NULL, related_name='saleman_product')
+    tag_product = models.ManyToManyField('TagProduct', related_name='tag_product')
 
 
 class SaleMan(models.Model):
