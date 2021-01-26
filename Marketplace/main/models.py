@@ -4,7 +4,7 @@ from django.db import models
 class Product(models.Model):
     title_product = models.CharField(max_length=100, help_text='введите название продукта')
     description_product = models.TextField(blank=True, help_text='введите описание товара')
-    price_product = models.DecimalField(max_digits=10, decimal_places=5, help_text='укажите цену')
+    price_product = models.DecimalField(max_digits=20, decimal_places=5, help_text='укажите цену')
     created_product = models.DateTimeField(auto_now_add=True)
     saleman_product = models.ForeignKey('SaleMan', on_delete=models.CASCADE, null=True, related_name='saleman_product')
     tag_product = models.ManyToManyField('TagProduct', related_name='tag_product')
