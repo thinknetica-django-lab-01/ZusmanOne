@@ -65,7 +65,12 @@
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            {% if user.is_authenticated %}
+                <p style="color: white"> Вы вошли как {{user.username}}</p>
+            {% else %}
+                <p style="color: white">Вы вошли как гость</p>
+            {% endif %}
+          <input class="form-control mr-sm-3" type="text" placeholder="Search" aria-label="Search">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
