@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 def home(request):
-    turn_on_block = False
+    turn_on_block = True
     return render(request, 'index.html', {'turn_on_block': turn_on_block})
 
 
