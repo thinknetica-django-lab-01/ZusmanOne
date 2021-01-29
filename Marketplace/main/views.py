@@ -15,9 +15,10 @@ class ProductListView(ListView):
     queryset = Product.objects.all()
     template_name = "main/product_list.html"
 
-from django.views.generic.list import DetailView
-class ProductDetail(DetailView):
+from django.views import generic
+class ProductDetail(generic.DetailView):
     model = Product
+    template_name = 'main/product_detail.html'
 
 
 

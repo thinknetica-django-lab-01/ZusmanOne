@@ -5,7 +5,7 @@ from django.db import models
 
 
 from ckeditor.widgets import CKEditorWidget
-from .models import Product
+from .models import Product,SaleMan
 class FlatPageAdmin(FlatPageAdmin):
     formfield_overrides = {
         models.TextField : {'widget': CKEditorWidget}
@@ -13,4 +13,5 @@ class FlatPageAdmin(FlatPageAdmin):
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage,FlatPageAdmin)
 admin.site.register(Product)
+admin.site.register(SaleMan)
 # Register your models here.
