@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 
-{% header block %}
+{% block header  %}
     {%include 'header.html'%}
 {% endblock %}
 
 {% block content %}
+    <h1> Список товаров </h1>
+    {% if product_list %}
+    <ul>
+        {% for product in product_list %}
+        <li>
+            <a href="{{ poduct.get_absolute_url }}"> {{product.title_product}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h1>В вашем магазине пока нет ни одного товара</h1>
+
+    {% endif %}
 
 {% endblock %}

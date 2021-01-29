@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product,CategoryProduct,SaleMan,TagProduct
 
 
 def home(request):
@@ -7,9 +8,15 @@ def home(request):
 
 
 
-from django.views import generic
+from django.views.generic.list import ListView
 
-class ProductListView(generic.ListView):
+class ProductListView(ListView):
+    model = Product
+    queryset = Product.objects.all()
+    template_name = "main/product_list.html"
+
+from django.views.generic.list import DetailView
+class ProductDetail(DetailView):
     model = Product
 
 
