@@ -20,7 +20,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             {% if user.is_authenticated %}
-                <p style="color: white"> Вы вошли как {{user.username}}</p>
+                <p align="middle" style="color: white"> Вы вошли как {{user.username}}</p>
             {% else %}
                 <p style="color: white">Вы вошли как гость</p>
             {% endif %}

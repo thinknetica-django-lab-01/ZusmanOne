@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load custom_tags %}
 {%block header%}
     {% include "header.html" with turn_on_block=True %}
 
@@ -20,9 +20,12 @@
             </li>
         </ul>
 
-
-
-
+        <div class="alert alert-secondary">
+            <div class="row">
+                    <div class="col-md-4">{{"Этот текст должен читаться задом наперед"|revers_string}}</div>
+                    <div class="col-md-4" align="middle">{%now 'jS F Y H:i'%}</div>
+            </div>
+        </div>
 
 
 {% endblock content %}
