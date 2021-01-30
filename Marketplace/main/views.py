@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Product,CategoryProduct,SaleMan,TagProduct
+from django.views.generic.list import ListView
+from django.views import generic
 
 
 def home(request):
@@ -8,14 +10,15 @@ def home(request):
 
 
 
-from django.views.generic.list import ListView
+
 
 class ProductListView(ListView):
     model = Product
     queryset = Product.objects.all()
     template_name = "main/product_list.html"
+    paginate_by = 2
 
-from django.views import generic
+
 class ProductDetail(generic.DetailView):
     model = Product
     template_name = 'main/product_detail.html'
