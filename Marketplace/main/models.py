@@ -47,7 +47,7 @@ class TagProduct(models.Model):
     title_tag = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name = 'Тэги '
+        verbose_name = 'Тэги'
 
     def __str__(self):
         return self.title_tag
