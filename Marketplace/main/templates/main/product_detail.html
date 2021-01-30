@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{%block header%}
+    {% include 'header.html' %}
+{%endblock%}
+
+{% block content %}
+    <h1>Модель: {{product.title_product}} </h1>
+    <p><strong>Описание:</strong>  {{ product.description_product}}</p> <!-- author detail link not yet defined -->
+    <p><strong>Цена:</strong> {{product.price_product }}</p>
+    <p><strong>Дата создания товара:</strong> {{ product.created_product }}</p>
+    <p><strong>Производитель:</strong> {{ product.saleman_product }}</p>
+    <p><strong>Категория товара:</strong> {{ product.category_product }}</p>
+{% endblock %}

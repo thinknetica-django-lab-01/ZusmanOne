@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -16,6 +17,8 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title_product
+    def get_absolute_url(self):
+        return reverse('good-detail',args = [str(self.id)])
 
 
 class SaleMan(models.Model):
@@ -23,7 +26,7 @@ class SaleMan(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     e_mail = models.EmailField(max_length=100,blank=True)
-
+    article = models.CharField(max_length=20, default='default-article')
     class Meta:
         verbose_name = 'Продавец'
 
