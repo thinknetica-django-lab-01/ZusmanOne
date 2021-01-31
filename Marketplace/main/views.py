@@ -13,11 +13,12 @@ def home(request):
 
 
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductListView(ListView):
     model = Product
-    queryset = Product.objects.all()
+   # queryset = Product.objects.all()
+    context_object_name = 'my_product'
     template_name = "main/product_list.html"
-    paginate_by = 2
+    paginate_by = 3
     # def get_context_data(self, **kwargs):
     #     context = super(ProductListView, self).get_context_data(**kwargs)
     #     if not context.get('is_paginated', False):
