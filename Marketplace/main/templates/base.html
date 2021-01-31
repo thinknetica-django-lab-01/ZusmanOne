@@ -56,25 +56,25 @@
     {% endblock content %}
 
       {% block pagination %}
-        {% if is_paginated %}
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                    <li><a href="?page= {{ page_obj.previous_page_number }}"> &laquo;</a> </li>
-                    <li> <a class="active" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a></li>
-                {% endif %}
-                <li class="active">{{ page_obj.number }}</li>
-                {% if page_obj.has_next %}
-                    <li><a class="active" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                    {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
-                        <li class="disabled"><a href="#">...</a></li>
-                        <li><a  href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></li>
-                    {% endif %}
-                <li><a href="?page={{ page_obj.next_page_number }}"> &raquo;</a> </li>
-                {% else %}
-                <li class="disabled"><span> &raquo;</span></li>
-                {% endif %}
-            </ul>
-        {% endif %}
+<!--        {% if is_paginated %}-->
+<!--            <ul class="pagination">-->
+<!--                {% if page_obj.has_previous %}-->
+<!--                    <li><a href="?page= {{ page_obj.previous_page_number }}&{{ tag }}"> &laquo;</a> </li>-->
+<!--                    <li> <a class="active" href="?page={{ page_obj.previous_page_number }}&{{ tag }}">{{ page_obj.previous_page_number }} </a></li>-->
+<!--                {% endif %}-->
+<!--                <li class="active">{{ page_obj.number }}</li>-->
+<!--                {% if page_obj.has_next %}-->
+<!--                    <li><a class="active" href="?page={{ page_obj.next_page_number }}&{{ tag }}">{{ page_obj.next_page_number }}</a>-->
+<!--                    {% if page_obj.next_page_number < page_obj.paginator.num_pages %}-->
+<!--                        <li class="disabled"><a href="#">...</a></li>-->
+<!--                        <li><a  href="?page={{ page_obj.paginator.num_pages }}&{{ tag }}">{{ page_obj.paginator.num_pages }}</a></li>-->
+<!--                    {% endif %}-->
+<!--                <li><a href="?page={{ page_obj.next_page_number }}&{{ tag }}"> &raquo;</a> </li>-->
+<!--                {% else %}-->
+<!--                <li class="disabled"><span> &raquo;</span></li>-->
+<!--                {% endif %}-->
+<!--            </ul>-->
+<!--        {% endif %}-->
       {% endblock %}
   </div>
 
