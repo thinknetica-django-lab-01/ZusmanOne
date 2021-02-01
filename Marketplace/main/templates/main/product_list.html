@@ -6,17 +6,41 @@
 
 {% block content %}
     <h1> Список товаров </h1>
-    {% if product_list %}
+<!--    {% if my_product %}-->
     <ul>
-        {% for product in product_list %}
+        {% for product in my_product %}
         <li>
-            <a href="{{ product.get_absolute_url }}"> {{product.title_product}} </a> - {{product.category_product}}
+            <a href="{{ product.get_absolute_url }}"> {{product.title_product}} </a> :
+
+            {% for tag in product.tag_product.all %}
+                <a href="?tag={{tag.title_tag}}"> {{ tag.title_tag }}</a>
+
+                {%  endfor %}
         </li>
         {% endfor %}
     </ul>
-    {% else %}
-    <h1>В вашем магазине пока нет ни одного товара</h1>
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}&page={{tag}}"> &laquo;</a> </li>
+                    <li> <a class="active" href="?page={{ page_obj.previous_page_number }}&page={{tag}}">{{ page_obj.previous_page_number }} </a></li>
+                {% endif %}
+                <li class="active">{{ page_obj.number }}</li>
+                {% if page_obj.has_next %}
+                    <li><a class="active" href="?page={{ page_obj.next_page_number }}&page={{tag}}">{{ page_obj.next_page_number }}</a>
+                    {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
+                        <li class="disabled"><a href="#">...</a></li>
+                        <li><a  href="?page={{ page_obj.paginator.num_pages }}&page={{tag}}">{{ page_obj.paginator.num_pages }}</a></li>
+                    {% endif %}
+                <li><a href="?page={{ page_obj.next_page_number }}&page={{tag}}"> &raquo;</a> </li>
+                {% else %}
+                <li class="disabled"><span> &raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+<!--    {% else %}-->
+<!--    <h1>В вашем магазине пока нет ни одного товара</h1>-->
 
-    {% endif %}
+<!--    {% endif %}-->
 
 {% endblock %}
