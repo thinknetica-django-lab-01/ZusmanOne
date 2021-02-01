@@ -5,8 +5,8 @@ from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from .forms import UpdateProfileForm
-
+from .forms import UpdateProfile
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
 def home(request):
     turn_on_block = True
@@ -44,11 +44,10 @@ class ProductDetail(generic.DetailView):
 
 class EditUserView(UpdateView):
     model = User
-    form_class = UpdateProfileForm
+    form_class = UpdateProfile
     success_url = '/'
-    template_name = 'update_profile.html'
-
-        def get_object(self):
-            return self.request.user
+    template_name = 'main/login_update.html'
+    def get_object(self):
+        return self.request.user
 
 # Create your views here.
