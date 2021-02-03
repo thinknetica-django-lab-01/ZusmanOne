@@ -44,7 +44,6 @@ class EditUserView(LoginRequiredMixin,UpdateView):
     template_name = 'main/login_update.html'
     #login_url = '/accounts/profile'
     #redirect_field_name = '/login/'
-    #next = '/accounts/profile/'
     def get_object(self):
         return self.request.user
 
