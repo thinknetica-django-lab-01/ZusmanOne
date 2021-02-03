@@ -16,6 +16,16 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact/">Контакты</a>
           </li>
+            {% if user.is_authenticated %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}" >Выйти </a></a>
+          </li>
+            {% else %}
+          <li class="nav-item"></li>
+          <a class="nav-link" href="{% url 'login' %}" >Войти </a></a>
+            {% endif %}
+
+          </li>
 
         </ul>
         <form class="form-inline my-2 my-lg-0">

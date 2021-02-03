@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .forms import UpdateProfile
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
     turn_on_block = True
@@ -36,11 +37,14 @@ class ProductDetail(DetailView):
     template_name = 'main/product_detail.html'
 
 
-class EditUserView(UpdateView):
+class EditUserView(LoginRequiredMixin,UpdateView):
     model = User
     form_class = UpdateProfile
     success_url = '/'
     template_name = 'main/login_update.html'
+    #login_url = '/accounts/profile'
+    redirect_field_name = '/login/'
+    next = '/accounts/profile/'
     def get_object(self):
         return self.request.user
 
