@@ -1,19 +1,13 @@
 from django.shortcuts import render
 from .models import Product,CategoryProduct,SaleMan,TagProduct
-from django.views.generic.list import ListView
-from django.views import generic
-from django.views.generic.edit import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from .forms import UpdateProfile
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.urls import reverse_lazy
 
 def home(request):
     turn_on_block = True
     return render(request, 'index.html', {'turn_on_block': turn_on_block})
-
-
-
 
 
 class ProductListView(ListView):
@@ -37,7 +31,7 @@ class ProductListView(ListView):
         return context
 
 
-class ProductDetail(generic.DetailView):
+class ProductDetail(DetailView):
     model = Product
     template_name = 'main/product_detail.html'
 
@@ -50,4 +44,19 @@ class EditUserView(UpdateView):
     def get_object(self):
         return self.request.user
 
+class ProductCreate(CreateView):
+    model = Product
+    fields = '__all__'
+    template_name = 'edit/product_form.html'
+
+class ProductUpdate(UpdateView):
+    model = Product
+    fields = '__all__'
+    template_name = 'edit/product_form.html'
+
+class ProductDelete(DeleteView):
+    model = Product
+    success_url = reverse_lazy('goods')
+    template_name = 'edit/product_delete.html'
+    template_name_suffix = '_delete'
 # Create your views here.

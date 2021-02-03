@@ -22,22 +22,23 @@
         {% if is_paginated %}
             <ul class="pagination">
                 {% if page_obj.has_previous %}
-                    <li><a href="?page={{ page_obj.previous_page_number }}&page={{tag}}"> &laquo;</a> </li>
-                    <li> <a class="active" href="?page={{ page_obj.previous_page_number }}&page={{tag}}">{{ page_obj.previous_page_number }} </a></li>
+                    <li><a href="?page={{ page_obj.previous_page_number }}"> &laquo;</a> </li>
+                    <li> <a class="active" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a></li>
                 {% endif %}
                 <li class="active">{{ page_obj.number }}</li>
                 {% if page_obj.has_next %}
-                    <li><a class="active" href="?page={{ page_obj.next_page_number }}&page={{tag}}">{{ page_obj.next_page_number }}</a>
+                    <li><a class="active" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
                     {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
                         <li class="disabled"><a href="#">...</a></li>
-                        <li><a  href="?page={{ page_obj.paginator.num_pages }}&page={{tag}}">{{ page_obj.paginator.num_pages }}</a></li>
+                        <li><a  href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></li>
                     {% endif %}
-                <li><a href="?page={{ page_obj.next_page_number }}&page={{tag}}"> &raquo;</a> </li>
+                <li><a href="?page={{ page_obj.next_page_number }}"> &raquo;</a> </li>
                 {% else %}
                 <li class="disabled"><span> &raquo;</span></li>
                 {% endif %}
             </ul>
         {% endif %}
+    <p><a href="{% url 'goods-create' %}">Добавить товар</a> </p>
 <!--    {% else %}-->
 <!--    <h1>В вашем магазине пока нет ни одного товара</h1>-->
 

@@ -11,4 +11,6 @@
     <p><strong>Дата создания товара:</strong> {{ product.created_product }}</p>
     <p><strong>Производитель:</strong> {{ product.saleman_product }}</p>
     <p><strong>Категория товара:</strong> {{ product.category_product }}</p>
+    <p><a href="{% url 'good-update' product.pk %}">обновить товар</a> </p>
+<p><a href="{% url 'good-delete' product.pk %}">удалить товар</a> </p>
 {% endblock %}
