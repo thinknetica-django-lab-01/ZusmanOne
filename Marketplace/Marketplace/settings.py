@@ -29,6 +29,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTHENTICATION_BACKENDS = [
+    # Требуется вход по имени пользователя в админке Django, независимо от `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # специальный метод аутентификации `allauth`, такой как вход по электронной почте
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,9 +49,26 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'main',
+    # добавляем для авторизации через соц. сети:
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # для гугла
+    'allauth.socialaccount.providers.google',
 ]
 
+SITE_ID = 1  #указывается для регистарции через соцсети
 
+#указывается для регистарции через соцсети:
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '360212987476-puo7evba3loiogq4gkglsoq5oa9g9e49.apps.googleusercontent.com',
+            'secret': 'BAb0P2jhudriYu_2DKx46auh',
+            'key': ''
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,7 +84,6 @@ MIDDLEWARE = [
 SITE_ID = 1
 
 ROOT_URLCONF = 'Marketplace.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
