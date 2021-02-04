@@ -47,17 +47,18 @@ class EditUserView(LoginRequiredMixin,UpdateView):
     def get_object(self):
         return self.request.user
 
-class ProductCreate(CreateView):
+class ProductCreate(LoginRequiredMixin,CreateView):
     model = Product
     fields = '__all__'
     template_name = 'edit/product_form.html'
 
-class ProductUpdate(UpdateView):
+
+class ProductUpdate(LoginRequiredMixin,UpdateView):
     model = Product
     fields = '__all__'
     template_name = 'edit/product_form.html'
 
-class ProductDelete(DeleteView):
+class ProductDelete(LoginRequiredMixin,DeleteView):
     model = Product
     success_url = reverse_lazy('goods')
     template_name = 'edit/product_delete.html'
