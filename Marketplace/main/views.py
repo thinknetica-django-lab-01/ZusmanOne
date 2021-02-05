@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from .models import Product,CategoryProduct,SaleMan,TagProduct
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from .forms import UpdateProfile
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 def home(request):
     turn_on_block = True
@@ -63,4 +65,11 @@ class ProductDelete(LoginRequiredMixin,DeleteView):
     success_url = reverse_lazy('goods')
     template_name = 'edit/product_delete.html'
     template_name_suffix = '_delete'
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created,**kwargs):
+    if created:
+        common_users, created = Group.objects.get_or_create(name = 'common users')
+        instance.groups.add(Group.objects.get(name='common users'))
 # Create your views here.
