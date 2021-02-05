@@ -65,8 +65,8 @@ SITE_ID = 1  #указывается для регистарции через с
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '360212987476-puo7evba3loiogq4gkglsoq5oa9g9e49.apps.googleusercontent.com',
-            'secret': 'BAb0P2jhudriYu_2DKx46auh',
+            'client_id': config('SECRET_CLIENT'),
+            'secret': config('SECRET_GOOGLE'),
             'key': ''
         }
     }
