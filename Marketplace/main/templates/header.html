@@ -16,7 +16,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact/">Контакты</a>
           </li>
-<<<<<<< HEAD
+
           <li class="nav-item">
               {% if  user.is_authenticated%}
           <a class="nav-link" href="{% url 'account_logout' %}">Выйти</a>
@@ -26,18 +26,8 @@
                 <a class="nav-link" href="{% url 'account_login' %}">Войти</a>
             </li>
                 {% endif %}
-=======
-            {% if user.is_authenticated %}
-          <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}" >Выйти </a></a>
-          </li>
-            {% else %}
-          <li class="nav-item"></li>
-          <a class="nav-link" href="{% url 'login' %}?next={{request.path}}" >Войти </a></a>
-            {% endif %}
 
-          </li>
->>>>>>> bd8ebe76d6714112630bab238f787a844e542932
+
 
         </ul>
         <form class="form-inline my-2 my-lg-0">

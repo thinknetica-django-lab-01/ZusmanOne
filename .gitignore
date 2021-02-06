@@ -2,7 +2,7 @@
 *.pyc
 /venv
 /.idea
-<<<<<<< HEAD
+
 /staticfiles
 /mediafiles
 
@@ -12,7 +12,7 @@
 ### Django ###
 *.log
 *.pot
-=======
+
 >>>>>>> 1_2_add_standart_app
 __pycache__/
 local_settings.py
@@ -127,7 +127,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+Marketplace/Marketplace/.env
 .venv
 env/
 venv/

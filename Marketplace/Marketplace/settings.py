@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(fxtxp_^e&s!wbwrxxsxf3e9o5!+ioy)m1x@-9mwe2j@($ni#m'
+SECRET_KEY = config.('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -63,8 +65,8 @@ SITE_ID = 1  #указывается для регистарции через с
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '360212987476-puo7evba3loiogq4gkglsoq5oa9g9e49.apps.googleusercontent.com',
-            'secret': 'BAb0P2jhudriYu_2DKx46auh',
+            'client_id': config('SECRET_CLIENT'),
+            'secret': config('SECRET_GOOGLE'),
             'key': ''
         }
     }

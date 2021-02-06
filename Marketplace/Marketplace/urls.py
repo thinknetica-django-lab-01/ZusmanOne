@@ -25,10 +25,9 @@ urlpatterns = [
     #path(r'^about/', include('django.contrib.flatpages.urls')),
     #path(r'^about/', include('django.contrib.flatpages.views.flatpage')),
     path('', include ('main.urls')),
-<<<<<<< HEAD
+
     path('accounts/', include('allauth.urls')),
-=======
+
     path('accounts/', include('django.contrib.auth.urls')),
->>>>>>> bd8ebe76d6714112630bab238f787a844e542932
 
 ]
