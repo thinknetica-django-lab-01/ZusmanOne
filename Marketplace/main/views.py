@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from .models import Product,CategoryProduct,SaleMan,TagProduct
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import User,Group,Permission
 from .forms import UpdateProfile
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.contenttypes.models import ContentType
 
 def home(request):
     turn_on_block = True
@@ -72,4 +73,3 @@ def create_user_profile(sender, instance, created,**kwargs):
     if created:
         common_users, created = Group.objects.get_or_create(name = 'common users')
         instance.groups.add(Group.objects.get(name='common users'))
-# Create your views here.
