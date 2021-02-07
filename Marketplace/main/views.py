@@ -76,7 +76,7 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
     template_name = 'edit/product_delete.html'
     template_name_suffix = '_delete'
 
-
+#формирование и отправка html письма на электронную почту пользователя
 def send_mail(user):
     htmly = get_template('edit/mail.html')
     d = {'username':user.username}
@@ -91,6 +91,7 @@ def send_mail(user):
 
 
 # добавление пользвателяв группу common_users при регистрации
+# отправка эл письма указанное при регистрации
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
