@@ -13,7 +13,6 @@ from django.http import HttpResponse
 from django.core.mail import EmailMultiAlternatives
 from django.template import loader
 from django.template.loader import get_template
-from django.template.loader import render_to_string
 
 
 def home(request):
@@ -79,10 +78,10 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 
 
 def send_mail(user):
-    #htmly = render_to_string('edit/mail.html')
+    htmly = get_template('edit/mail.html')
     d = {'username':user.username}
-    html_content = render_to_string('edit/mail.html',d)
-    msg = EmailMultiAlternatives(subject='test',from_email='zusmanone1@gmail.com',to=[user.email])
+    html_content = htmly.render(d)
+    msg = EmailMultiAlternatives(subject='test',body=html_content,to=[user.email])
     msg.attach_alternative(html_content,'text/html')
     msg.send()
 
