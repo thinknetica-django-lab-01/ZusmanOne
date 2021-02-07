@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import EditUserView
+from .views import *
 
 urlpatterns = [
     path('goods/', views.ProductListView.as_view(), name='goods'),
@@ -12,6 +13,8 @@ urlpatterns += [    #тут хранятся маршруты для созда�
     path(r'goods/create/', views.ProductCreate.as_view(), name='goods-create'),
     path(r'good/<int:pk>/update/', views.ProductUpdate.as_view(), name='good-update'),
     path(r'^good/<int:pk>/delete/', views.ProductDelete.as_view(), name='good-delete'),
-
-
 ]
+
+# urlpatterns +=[
+#     path('send/',test,name='sendmail')
+# ]

@@ -165,3 +165,13 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
+# настройка для отправки писем
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'zusmanone1@gmail.com'
+# EMAIL_HOST_PASSWORD = '1208091qwe'
+# EMAIL_USE_SSL = True
+
