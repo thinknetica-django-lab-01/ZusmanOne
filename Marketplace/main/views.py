@@ -97,8 +97,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         common_users, created = Group.objects.get_or_create(name='common users')
         instance.groups.add(Group.objects.get(name='common users'))
-        if instance.email:
-            send_mail(instance)
+        send_mail(instance)
 
 
 # функция для отправки писем
