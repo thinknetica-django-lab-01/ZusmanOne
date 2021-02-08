@@ -55,14 +55,14 @@ class TagProduct(models.Model):
         return self.title_tag
 
 class Subscriber(models.Model):
-    profile = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     #new_good = models.CharField(max_length=20)
     class Meta:
         verbose_name = 'Подписчик'
         verbose_name_plural = 'Подписчики'
 
     def __str__(self):
-        return str(self.profile)
+        return str(self.user)
 
 
 # Create your models here.

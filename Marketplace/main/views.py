@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product, CategoryProduct, SaleMan, TagProduct
+from .models import *
 from django.contrib.auth.models import User, Group, Permission
 from .forms import UpdateProfile
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
@@ -76,6 +76,12 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
     template_name = 'edit/product_delete.html'
     template_name_suffix = '_delete'
 
+# class MySubscriber(LoginRequiredMixin,CreateView):
+#     model = Subscriber
+#     fields = '__all__'
+#     template_name = "main/product_list.html"
+
+
 #формирование и отправка html письма на электронную почту пользователя
 def send_mail(user):
     htmly = get_template('edit/mail.html')
@@ -86,10 +92,6 @@ def send_mail(user):
     msg.send()
 
 
-
-
-
-
 # добавление пользвателяв группу common_users при регистрации
 # отправка эл письма указанное при регистрации
 @receiver(post_save, sender=User)
@@ -98,6 +100,22 @@ def create_user_profile(sender, instance, created, **kwargs):
         common_users, created = Group.objects.get_or_create(name='common users')
         instance.groups.add(Group.objects.get(name='common users'))
         send_mail(instance)
+
+
+#формирование письма с уведомлением о новинке товара
+def send_new_good(Subscriber):
+    good_html = get_template('edit/newgood.html')
+    data = {'subscriber':Subscriber.user}
+    body_html = good_html.render(data)
+    mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,to=[Subscriber.objects.values("user__email")])
+    mymsg.attach_alternative(body_html,'text/html')
+    mymsg.send()
+
+@receiver(post_save)
+def send_mail_subscriber(sender, instance, created,**kwargs):
+    if Product is created:
+        if instance.email:
+            send_new_good(instance)
 
 
 # функция для отправки писем
