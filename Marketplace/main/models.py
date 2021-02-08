@@ -51,5 +51,5 @@ class TagProduct(models.Model):
 
     def __str__(self):
         return self.title_tag
-
+    
 # Create your models here.
