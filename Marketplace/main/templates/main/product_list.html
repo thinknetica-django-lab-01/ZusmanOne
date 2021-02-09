@@ -39,6 +39,13 @@
             </ul>
         {% endif %}
     <p><a href="{% url 'goods-create' %}">Добавить товар</a> </p>
+    <div class="col-md-4">
+                <form action="{% url 'subscriber' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="btn btn-primary" type="submit" role="button" value="подписаться">
+                </form>
+    </div>
 <!--    {% else %}-->
 <!--    <h1>В вашем магазине пока нет ни одного товара</h1>-->
 

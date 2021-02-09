@@ -15,6 +15,6 @@ urlpatterns += [    #тут хранятся маршруты для созда�
     path(r'^good/<int:pk>/delete/', views.ProductDelete.as_view(), name='good-delete'),
 ]
 
-# urlpatterns +=[
-#     path('send/',test,name='sendmail')
-# ]
+urlpatterns += [
+    path('subscriber/', subscribe_user,name='subscriber'),
+]
