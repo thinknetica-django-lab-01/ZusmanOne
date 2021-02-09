@@ -103,19 +103,18 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 #формирование письма с уведомлением о новинке товара
-def send_new_good(Subscriber):
+def send_new_good(Product):
     good_html = get_template('edit/newgood.html')
-    data = {'subscriber':Subscriber.user}
+    data = {'product':Product}
     body_html = good_html.render(data)
     mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,to=[Subscriber.objects.values("user__email")])
     mymsg.attach_alternative(body_html,'text/html')
     mymsg.send()
 
-@receiver(post_save)
+@receiver(post_save,sender=Product)
 def send_mail_subscriber(sender, instance, created,**kwargs):
-    if Product is created:
-        if instance.email:
-            send_new_good(instance)
+    if created:
+        send_new_good(instance)
 
 
 # функция для отправки писем
