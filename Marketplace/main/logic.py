@@ -10,11 +10,12 @@ import datetime, pytz
 
 
 
-def send_week():
-    weeek_html = get_template('edit/newgood.html')
+def last_week():
+    week_html = get_template('edit/newgood.html')
     data_week={'product':Product}
-    body_week = weeek_html.render(data_week)
-    msg_week = EmailMultiAlternatives(subject='плановая рассылка',body=body_week,to=[Subscriber.objects.values('user__mail')])
+    body_week = week_html.render(data_week)
+    msg_week = EmailMultiAlternatives(subject='плановая рассылка',body=body_week,
+                                      to=[Subscriber.objects.values('user__mail')])
     msg_week.attach_alternative(body_week,'text/html')
     OurTZ = pytz.timezone('Europe/Moscow')
     last_week = datetime.datetime.now(OurTZ) - datetime.timedelta(days=2)
@@ -26,7 +27,7 @@ def start():
     scheduler = BackgroundScheduler
     scheduler.add_jobstore(DjangoJobStore(),'default')
     scheduler.add_job(
-        send_new_good(),
+        last_week(),
         'interval', minute = 1,
         id = 'my_job',
         jobstore = 'default',
