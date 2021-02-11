@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # для гугла
     'allauth.socialaccount.providers.google',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1  #указывается для регистарции через соцсети
@@ -87,6 +88,7 @@ SITE_ID = 1
 
 ROOT_URLCONF = 'Marketplace.urls'
 TEMPLATES = [
+
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
@@ -102,6 +104,7 @@ TEMPLATES = [
             'libraries':{
                 'custom_templatetag':'main.templatetags.custom_tags'
             },
+
         },
     },
 ]

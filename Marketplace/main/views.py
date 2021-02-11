@@ -122,6 +122,8 @@ def send_new_good(Product):
     mymsg.attach_alternative(body_html,'text/html')
     mymsg.send()
 
+
+#сигнал отправления письма
 @receiver(post_save,sender=Product)
 def send_mail_subscriber(sender, instance, created,**kwargs):
     if created:
