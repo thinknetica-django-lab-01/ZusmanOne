@@ -1,18 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Product, CategoryProduct, SaleMan, TagProduct
-from django.contrib.auth.models import User, Group, Permission
+from .models import *
+from django.contrib.auth.models import User, Group
 from .forms import UpdateProfile
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.core.mail import send_mail  # модуль для отправки писем
+from django.core.mail import send_mail, EmailMultiAlternatives  # модуль для отправки писем
 from django.contrib import messages
-from django.http import HttpResponse
-from django.core.mail import EmailMultiAlternatives
-from django.template import loader
 from django.template.loader import get_template
+from django import forms
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 
 def home(request):
@@ -76,6 +76,8 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
     template_name = 'edit/product_delete.html'
     template_name_suffix = '_delete'
 
+
+
 #формирование и отправка html письма на электронную почту пользователя
 def send_mail(user):
     htmly = get_template('edit/mail.html')
@@ -86,18 +88,48 @@ def send_mail(user):
     msg.send()
 
 
-
-
-
-
-# добавление пользвателяв группу common_users при регистрации
-# отправка эл письма указанное при регистрации
+#  сигнал добавление пользвателяв группу common_users при регистрации
+#  сигнал отправка эл письма указанное при регистрации
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         common_users, created = Group.objects.get_or_create(name='common users')
         instance.groups.add(Group.objects.get(name='common users'))
         send_mail(instance)
+
+
+#создание формы для подписки
+@login_required
+def subscribe_user(request):
+    if request.method =='POST':
+        form = forms.Form(request.POST)
+        if form.is_valid():
+            subscriber, created = Subscriber.objects.get_or_create(user=request.user)
+            if created:
+                messages.success(request, 'вы стали подписчиком') #выводит на странице админа??
+            else:
+                messages.error(request, 'вы уже подписаны') #выводит на странице админа??
+        return HttpResponseRedirect(request.META["HTTP_REFERER"]) #при нажатии на кнопку останется на этой же странице
+
+
+
+#формирование письма с уведомлением о новинке товара
+def send_new_good(Product):
+    good_html = get_template('edit/newgood.html')
+    data = {'product':Product}
+    body_html = good_html.render(data)
+    mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,to=[Subscriber.objects.values("user__email")])
+    mymsg.attach_alternative(body_html,'text/html')
+    mymsg.send()
+
+@receiver(post_save,sender=Product)
+def send_mail_subscriber(sender, instance, created,**kwargs):
+    if created:
+        send_new_good(instance)
+
+
+
+
 
 
 # функция для отправки писем
@@ -118,20 +150,3 @@ def create_user_profile(sender, instance, created, **kwargs):
 #     else:
 #         mail_form = MailForm()
 #     return render(request, 'edit/mail.html', {'form': mail_form})
-
-# def test_mail(user):
-#     template = loader.get_template(template_name='edit/mail.html')
-#     html = template.render(context={'user': user})
-#     msg = EmailMultiAlternatives(
-#         subject="тестовое сообщение",
-#         body=html,
-#         from_email='zusmanone1@gmail.com',
-#         to=[user.email],
-#     )
-#     msg.content_subtype = 'html'
-#     msg.send()
-#
-# @receiver(post_save, sender=User)
-# def send_test_email(sender, created, **kwargs):
-#     if created:
-#         test_mail(sender)

@@ -169,4 +169,3 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-

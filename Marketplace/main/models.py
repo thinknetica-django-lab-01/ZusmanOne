@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
@@ -29,6 +30,7 @@ class SaleMan(models.Model):
     article = models.CharField(max_length=20, default='default-article')
     class Meta:
         verbose_name = 'Продавец'
+        verbose_name_plural = 'Продавцы'
 
 
     def __str__(self):
@@ -51,5 +53,18 @@ class TagProduct(models.Model):
 
     def __str__(self):
         return self.title_tag
-    
+
+
+class Subscriber(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+    #new_good = models.CharField(max_length=20)
+    class Meta:
+        verbose_name = 'Подписчик'
+        verbose_name_plural = 'Подписчики'
+
+    def __str__(self):
+        return str(self.user)
+
+
+
 # Create your models here.
