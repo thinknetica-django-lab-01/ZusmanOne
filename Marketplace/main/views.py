@@ -13,6 +13,7 @@ from django.template.loader import get_template
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+import datetime, pytz
 
 
 def home(request):
@@ -116,9 +117,10 @@ def subscribe_user(request):
 #формирование письма с уведомлением о новинке товара
 def send_new_good(Product):
     good_html = get_template('edit/newgood.html')
-    data = {'product':Product}
+    data = {'product': Product}
     body_html = good_html.render(data)
-    mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,to=[Subscriber.objects.values("user__email")])
+    mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,
+                                   to=[Subscriber.objects.values("user__email")])
     mymsg.attach_alternative(body_html,'text/html')
     mymsg.send()
 

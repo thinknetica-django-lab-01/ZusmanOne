@@ -50,14 +50,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'main',
+    #'main',
     # добавляем для авторизации через соц. сети:
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # для гугла
     'allauth.socialaccount.providers.google',
-    'django_apscheduler',
+    "django_apscheduler",
+    'main.apps.MainConfig'
+
 ]
 
 SITE_ID = 1  #указывается для регистарции через соцсети

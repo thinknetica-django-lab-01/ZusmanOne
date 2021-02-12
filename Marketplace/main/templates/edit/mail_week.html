@@ -1,0 +1,9 @@
+
+<h1>приветствуем вас {{username}}</h1>
+
+<p>у нас появились  товары недели  </p>
+{% for goods in last_week %}
+
+<p>{{goods.title_product}}</p>
+
+{% endfor %}
