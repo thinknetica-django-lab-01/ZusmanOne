@@ -4,6 +4,8 @@ from .models import *
 from django.template.loader import get_template
 from django.core.mail import send_mail, EmailMultiAlternatives
 
+#планировщик задач
+
 scheduler = BackgroundScheduler()
 job = None
 
