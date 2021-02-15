@@ -3,9 +3,28 @@ import datetime, pytz
 from .models import *
 from django.template.loader import get_template
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
+
+
+#формирование письма с уведомлением о новинке товара
+def send_new_good(Product):
+    good_html = get_template('edit/newgood.html')
+    data = {'product': Product}
+    body_html = good_html.render(data)
+    mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,
+                                   to=[Subscriber.objects.values("user__email")])
+    mymsg.attach_alternative(body_html,'text/html')
+    mymsg.send()
+
+
+
+
+
+
 
 #планировщик задач
-
 scheduler = BackgroundScheduler()
 job = None
 

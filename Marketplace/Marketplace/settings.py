@@ -174,7 +174,7 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # REDIS settings
-# Настройки Redis условные
+# Настройки Redis условныеc
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = '6379'
 # CELERY settings

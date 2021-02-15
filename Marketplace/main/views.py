@@ -14,7 +14,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 import datetime, pytz
-
+from .tasks import send_celery_mail
 
 def home(request):
     turn_on_block = True
@@ -115,22 +115,10 @@ def subscribe_user(request):
 
 
 #формирование письма с уведомлением о новинке товара
-def send_new_good(Product):
-    good_html = get_template('edit/newgood.html')
-    data = {'product': Product}
-    body_html = good_html.render(data)
-    mymsg = EmailMultiAlternatives(subject='новинка товара',body=body_html,
-                                   to=[Subscriber.objects.values("user__email")])
-    mymsg.attach_alternative(body_html,'text/html')
-    mymsg.send()
-
-
-#сигнал отправления письма
 @receiver(post_save,sender=Product)
 def send_mail_subscriber(sender, instance, created,**kwargs):
     if created:
-        send_new_good(instance)
-
+        send_celery_mail.delay(instance)
 
 
 
