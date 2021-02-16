@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.template.loader import get_template
 from django import forms
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
 import datetime, pytz
 from .tasks import send_celery_mail
 
@@ -116,9 +116,10 @@ def subscribe_user(request):
 
 #формирование письма с уведомлением о новинке товара
 @receiver(post_save,sender=Product)
-def send_mail_subscriber(sender, instance, created,**kwargs):
+def send_mail_subscriber(sender, instance, created,**kwargs,):
     if created:
-        send_celery_mail.delay(instance)
+        task = Product.objects.values('id')
+        send_celery_mail.delay(list(task))
 
 
 
