@@ -170,6 +170,20 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
+
+#настройки кэша
+CACHES  =  {
+    'default' :  {
+        'BACKEND' :  'django_redis.cache.RedisCache' ,
+        'LOCATION' :  'redis: //127.0.0.1: 6379/1' ,
+        'OPTIONS' :  {
+            'CLIENT_CLASS' :  'django_redis. client.DefaultClient ' ,
+        }
+    }
+}
+
+
+
 # настройка для отправки писем
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -184,3 +198,5 @@ CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
