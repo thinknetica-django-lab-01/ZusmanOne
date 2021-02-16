@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
+from decouple import config  #скрывает ключи
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -174,7 +174,7 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # REDIS settings
-# Настройки Redis условныеc
+# Настройки Redis условные
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = '6379'
 # CELERY settings

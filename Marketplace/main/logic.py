@@ -20,13 +20,9 @@ def send_new_good(Product):
 
 
 
-
-
-
-
 #планировщик задач
-scheduler = BackgroundScheduler()
-job = None
+# scheduler = BackgroundScheduler()
+# job = None
 
 def product_week():
     OurTZ = pytz.timezone('Europe/Moscow')
@@ -41,12 +37,12 @@ def product_week():
     message_week.send()
 
 
-def start_job():
-    global job
-    job = scheduler.add_job(product_week, 'interval', days=7)
-    try:
-        print('запуск планировщика')
-        scheduler.start()
-    except KeyboardInterrupt:
-        print('остановка планировщика')
-        scheduler.shutdown()
+# def start_job():
+#     global job
+#     job = scheduler.add_job(product_week, 'interval', days=7)
+#     try:
+#         print('запуск планировщика')
+#         scheduler.start()
+#     except KeyboardInterrupt:
+#         print('остановка планировщика')
+#         scheduler.shutdown()
