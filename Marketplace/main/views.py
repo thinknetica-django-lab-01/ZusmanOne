@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, request
 import datetime, pytz
 from .tasks import send_celery_mail
+from .logic import send_new_good
 
 def home(request):
     turn_on_block = True
@@ -118,8 +119,8 @@ def subscribe_user(request):
 @receiver(post_save,sender=Product)
 def send_mail_subscriber(sender, instance, created,**kwargs,):
     if created:
-        task = Product.objects.values('id')
-        send_celery_mail.delay(list(task))
+        send_celery_mail.delay(instance.title_product)
+
 
 
 
