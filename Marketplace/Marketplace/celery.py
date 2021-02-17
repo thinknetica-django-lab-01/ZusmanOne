@@ -21,9 +21,9 @@ def debug_task(self):
     print(f'Request: {self.request!r}')
 
 
-app.conf.beat_schedule = {
-    'send_mail_week':{
-        'task': 'main.tasks.send_week_mail',
-        'schedule': crontab(minute=0,hour='10', day_of_week='monday')
-    }
-}
+# app.conf.beat_schedule = {
+#     'send_mail_week':{
+#         'task': 'main.tasks.send_week_mail',
+#         'schedule': crontab(minute=0,hour='10', day_of_week='monday')
+#     }
+# }
