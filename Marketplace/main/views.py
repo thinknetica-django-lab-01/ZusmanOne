@@ -119,7 +119,8 @@ def subscribe_user(request):
 @receiver(post_save,sender=Product)
 def send_mail_subscriber(sender, instance, created,**kwargs,):
     if created:
-        send_celery_mail.delay(instance.title_product)
+        send_celery_mail.delay(instance.product_id)
+        print(instance.product_id)
 
 
 

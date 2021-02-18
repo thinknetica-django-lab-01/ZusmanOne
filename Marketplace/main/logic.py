@@ -40,13 +40,13 @@ def product_week():
     message_week.content_subtype = 'html'
     message_week.send()
 
-
-def start_job():
-    global job
-    job = scheduler.add_job(product_week, 'interval', days=7)
-    try:
-        print('запуск планировщика')
-        scheduler.start()
-    except KeyboardInterrupt:
-        print('остановка планировщика')
-        scheduler.shutdown()
+#
+# def start_job():
+#     global job
+#     job = scheduler.add_job(product_week, 'interval', days=7)
+#     try:
+#         print('запуск планировщика')
+#         scheduler.start()
+#     except KeyboardInterrupt:
+#         print('остановка планировщика')
+#         scheduler.shutdown()
