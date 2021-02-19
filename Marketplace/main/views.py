@@ -19,7 +19,7 @@ from .tasks import send_celery_mail
 # импортируем модули для кэширования отдельных контроллеров, (method-decorator нужен для CBV)
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-
+from django.core.cache import cache
 
 
 
@@ -59,7 +59,7 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         self.object.visit += 1
         self.object.save()
-        visit = self.object.visit
+        visit = cache.get_or_set(f'{self.object.pk}', self.object.visit,30)
         context["visit"] = visit
         return context
 
