@@ -51,12 +51,17 @@ class ProductListView(ListView):
 #использование миксина для кжширования
 
 
-@method_decorator(cache_page(60 * 5), name="dispatch")
+
 class ProductDetail(DetailView):
-    cache_timeout = 900
     model = Product
     template_name = 'main/product_detail.html'
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.object.visit += 1
+        self.object.save()
+        visit = self.object.visit
+        context["visit"] = visit
+        return context
 
 
 

@@ -11,7 +11,7 @@ class Product(models.Model):
     saleman_product = models.ForeignKey('SaleMan', on_delete=models.CASCADE, null=True, related_name='saleman_product')
     tag_product = models.ManyToManyField('TagProduct', related_name='tag_product')
     category_product = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=models.SET_NULL)
-
+    visit = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = 'Товар'
