@@ -12,6 +12,7 @@ class Product(models.Model):
     tag_product = models.ManyToManyField('TagProduct', related_name='tag_product')
     category_product = models.ForeignKey('CategoryProduct', null=True, blank=True, on_delete=models.SET_NULL)
 
+
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'

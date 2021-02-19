@@ -22,6 +22,7 @@ from django.views.decorators.cache import cache_page
 
 
 
+
 def home(request):
     turn_on_block = True
     return render(request, 'index.html', {'turn_on_block': turn_on_block})
@@ -55,6 +56,9 @@ class ProductDetail(DetailView):
     cache_timeout = 900
     model = Product
     template_name = 'main/product_detail.html'
+
+
+
 
 
 class EditUserView(LoginRequiredMixin, UpdateView):
