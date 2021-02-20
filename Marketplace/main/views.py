@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, request
 import datetime, pytz
 from .tasks import send_celery_mail
+from .logic import send_new_good
 
 # импортируем модули для кэширования отдельных контроллеров, (method-decorator нужен для CBV)
 from django.utils.decorators import method_decorator
@@ -134,6 +135,7 @@ def send_mail_subscriber(sender, instance, created,**kwargs,):
     if created:
         send_celery_mail.delay(instance.product_id)
         print(instance.product_id)
+
 
 
 
