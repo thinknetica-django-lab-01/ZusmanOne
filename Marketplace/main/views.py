@@ -16,6 +16,12 @@ from django.http import HttpResponseRedirect, request
 import datetime, pytz
 from .tasks import send_celery_mail
 
+# импортируем модули для кэширования отдельных контроллеров, (method-decorator нужен для CBV)
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+
+
 def home(request):
     turn_on_block = True
     return render(request, 'index.html', {'turn_on_block': turn_on_block})
@@ -41,8 +47,12 @@ class ProductListView(ListView):
             context['tag'] = my_tag
         return context
 
+#использование миксина для кжширования
 
+
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class ProductDetail(DetailView):
+    cache_timeout = 900
     model = Product
     template_name = 'main/product_detail.html'
 
