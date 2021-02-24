@@ -20,7 +20,7 @@ from .logic import send_new_good
 # импортируем модули для кэширования отдельных контроллеров, (method-decorator нужен для CBV)
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-
+from django.core.cache import cache
 
 
 
@@ -52,12 +52,17 @@ class ProductListView(ListView):
 #использование миксина для кжширования
 
 
-@method_decorator(cache_page(60 * 5), name="dispatch")
+
 class ProductDetail(DetailView):
-    cache_timeout = 900
     model = Product
     template_name = 'main/product_detail.html'
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.object.visit += 1
+        self.object.save()
+        visit = cache.get_or_set(f'{self.object.pk}', self.object.visit,30)
+        context["visit"] = visit
+        return context
 
 
 

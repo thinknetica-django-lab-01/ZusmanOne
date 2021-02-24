@@ -12,6 +12,6 @@
     <p><strong>Производитель:</strong> {{ product.saleman_product }}</p>
     <p><strong>Категория товара:</strong> {{ product.category_product }}</p>
     <p><a href="{% url 'good-update' product.pk %}">обновить товар</a> </p>
-    <p>просмотры: {{counter}}</p>
+    <p>просмотры: {{visit}}</p>
 <p><a href="{% url 'good-delete' product.pk %}">удалить товар</a> </p>
 {% endblock %}
